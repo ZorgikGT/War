@@ -18,11 +18,11 @@ protected:
     int health = 100;
 public:
     virtual ~Human() = default;
-    virtual int setAge() = 0;
+    virtual int getAge() = 0;
     virtual void GetAll() = 0;
-    virtual int setSpeed() = 0;
-    virtual int setAttack() = 0;
-    virtual int setArmor() = 0;
+    virtual int getSpeed() = 0;
+    virtual int getAttack() = 0;
+    virtual int getArmor() = 0;
 };
 
 class Archer : public Human {
@@ -37,19 +37,19 @@ public:
     Archer(int age, int attack, int speed, int armor)
         :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
         {}
-    int setAge() override {
+    int getAge() override {
         return H_age;
     }
     void GetAll() override {
         std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
     }
-    int setSpeed() override {
+    int getSpeed() override {
         return H_speed;
     }
-    int setAttack() override {
+    int getAttack() override {
         return H_attack;
     }
-    int setArmor() override {
+    int getArmor() override {
         return H_armor;
     }
 
@@ -67,19 +67,19 @@ public:
     Warrior(int age, int attack, int speed, int armor)
         :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
         {}
-    int setAge() override{
+    int getAge() override{
         return H_age;
     }
     void GetAll() override {
         std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
     }
-    int setSpeed() override {
+    int getSpeed() override {
         return H_speed;
     }
-    int setAttack() override {
+    int getAttack() override {
         return H_attack;
     }
-    int setArmor() override {
+    int getArmor() override {
         return H_armor;
     }
 };
@@ -97,22 +97,51 @@ public:
         :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
         {}
 
-    int setAge() override {
+    int getAge() override {
         return H_age;
     }
     void GetAll() override {
         std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
     }
-    int setSpeed() override {
+    int getSpeed() override {
         return H_speed;
     }
-    int setAttack() override {
+    int getAttack() override {
         return H_attack;
     }
-    int setArmor() override {
+    int getArmor() override {
         return H_armor;
     }
 
+};
+
+class Squad {
+private:
+    std::vector <Human *> Mysquad;
+
+public:
+
+    void setSquad(auto *number) {
+       Mysquad = *number;
+    }
+
+    void getSquad() {
+        for(int i = 0; i < Mysquad.size(); i++) {
+            Mysquad[i]->getArmor();
+            Mysquad[i]->getAttack();
+            Mysquad[i]->getSpeed();
+            Mysquad[i]->getAge();
+            Mysquad[i]->GetAll();
+        }
+    }
+
+    void getUnit(int i) {
+        Mysquad[i]->getArmor();
+        Mysquad[i]->getAttack();
+        Mysquad[i]->getSpeed();
+        Mysquad[i]->getAge();
+        Mysquad[i]->GetAll();
+    }
 };
 
 int main() {
@@ -128,22 +157,21 @@ int main() {
     for(int i = 0; i < amount; i++) {
         Archervector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30));
     }
-    for (auto archer : Archervector) {
-        archer->setAge();
-        archer->setSpeed();
-        archer->setAttack();
-        archer->GetAll();
-        int Amount = 0; Amount ++;
-    }
+
+    Squad Archers;
+    Archers.setSquad( &Archervector);
+    Archers.getSquad();
+    Archers.getUnit(2);
+
     std::cout << "Enter amount of warriors: ";
     std::cin >> amount;
     for(int i = 0; i < amount; i++) {
         Warriorvector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30));
     }
     for (auto warrior : Warriorvector) {
-        warrior->setAge();
-        warrior->setSpeed();
-        warrior->setAttack();
+        warrior->getAge();
+        warrior->getSpeed();
+        warrior->getAttack();
         warrior->GetAll();
         int Amount = 0; Amount ++;
     }
@@ -153,9 +181,9 @@ int main() {
         Peasantvector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30 ));
     }
     for (auto peasant : Peasantvector) {
-        peasant->setAge();
-        peasant->setSpeed();
-        peasant->setAttack();
+        peasant->getAge();
+        peasant->getSpeed();
+        peasant->getAttack();
         peasant->GetAll();
         int Amount = 0; Amount ++;
     }
