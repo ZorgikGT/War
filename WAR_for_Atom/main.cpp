@@ -241,12 +241,8 @@ int main()
                 Army.deleteSquad(number);
                 break;
             }
-            case 5: {
-                break;
-            }
-
         }
+        if (command == 5) break;
     }
 return 0;
 }
-
