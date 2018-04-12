@@ -1,181 +1,252 @@
-# include <iostream>
-# include <vector>
-# include <cstdlib>
-# include <ctime>
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 
-class Human {
-protected:
-    int health = 100;
-public:
-    virtual ~Human() = default;
-    virtual int getAge() = 0;
-    virtual void GetAll() = 0;
-    virtual int getSpeed() = 0;
-    virtual int getAttack() = 0;
-    virtual int getArmor() = 0;
+class Unit {
+    public:
+        virtual ~Unit() = default;
+        virtual int getSpeed() = 0;
+        virtual int getHealth() = 0;
+        virtual int getAge() = 0;
+        virtual int getArmor() = 0;
+        virtual int getAttack() = 0;
 };
 
-class Archer : public Human {
-    int H_age = 0;
-    int H_attack = 0;
-    int H_speed = 0;
-    int H_armor = 0;
+class Archer : public Unit{
+int m_age = 0, m_attack = 0, m_speed = 0, m_armor = 0, m_health = 0;
 public:
-    Archer()
-        :H_age()
-        {}
-    Archer(int age, int attack, int speed, int armor)
-        :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
-        {}
-    int getAge() override {
-        return H_age;
-    }
-    void GetAll() override {
-        std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
-    }
-    int getSpeed() override {
-        return H_speed;
-    }
-    int getAttack() override {
-        return H_attack;
-    }
-    int getArmor() override {
-        return H_armor;
+    Archer(int age, int attack, int speed, int armor, int health)
+        :m_age (age), m_attack(attack), m_speed(speed), m_armor(armor), m_health(health)
+    {}
+
+    int getAge() override
+    {
+        return m_age;
     }
 
-};
+    int getAttack() override
+    {
+        return m_attack;
+    }
 
-class Warrior : public Human {
-    int H_age = 0;
-    int H_attack = 0;
-    int H_speed = 0;
-    int H_armor = 0;
-public:
-    Warrior()
-        :H_age()
-        {}
-    Warrior(int age, int attack, int speed, int armor)
-        :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
-        {}
-    int getAge() override{
-        return H_age;
+    int getArmor()
+    {
+        return m_armor;
     }
-    void GetAll() override {
-        std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
+
+    int getSpeed()
+    {
+        return m_speed;
     }
-    int getSpeed() override {
-        return H_speed;
-    }
-    int getAttack() override {
-        return H_attack;
-    }
-    int getArmor() override {
-        return H_armor;
+
+    int getHealth()
+    {
+        return m_health;
     }
 };
 
-class Peasant : public Human {
-    int H_age = 0;
-    int H_attack = 0;
-    int H_speed = 0;
-    int H_armor = 0;
+class Citizen : public Unit{
+    int m_age = 0, m_attack = 0, m_speed = 0, m_armor = 0, m_health = 0;
 public:
-    Peasant()
-        :H_age()
-        {}
-    Peasant(int age, int attack, int speed, int armor)
-        :H_age(age), H_attack(attack), H_speed(speed), H_armor(armor)
-        {}
+    Citizen(int age, int attack, int speed, int armor, int health)
+        :m_age(age), m_attack(attack), m_speed(speed), m_armor(armor), m_health(health)
+    {}
 
-    int getAge() override {
-        return H_age;
+    int getAge() override
+    {
+        return m_age;
     }
-    void GetAll() override {
-        std::cout << "Age: " << H_age << " Speed: " << H_speed << " Attack: "<< H_attack << " Armor: " << H_armor << std::endl;
+
+    int getAttack() override
+    {
+        return m_attack;
     }
-    int getSpeed() override {
-        return H_speed;
+
+    int getArmor()
+    {
+        return m_armor;
     }
-    int getAttack() override {
-        return H_attack;
+
+    int getSpeed()
+    {
+        return m_speed;
     }
-    int getArmor() override {
-        return H_armor;
+
+    int getHealth()
+    {
+        return m_health;
+    }
+};
+
+class Warrior : public Unit{
+    int m_age = 0, m_attack = 0, m_speed = 0, m_armor = 0, m_health = 0;
+public:
+    Warrior(int age, int attack, int speed, int armor, int health)
+        :m_age(age), m_attack(attack), m_speed(speed), m_armor(armor), m_health(health)
+    {}
+
+    int getAge() override
+    {
+        return m_age;
+    }
+
+    int getAttack() override
+    {
+        return m_attack;
+    }
+
+    int getArmor()
+    {
+        return m_armor;
+    }
+
+    int getSpeed()
+    {
+        return m_speed;
+    }
+
+    int getHealth()
+    {
+        return m_health;
     }
 
 };
 
 class Squad {
 private:
-    std::vector <Human *> Mysquad;
-
+    std::vector <Unit *> squadName;
 public:
-
-    void setSquad(auto *number) {
-       Mysquad = *number;
+    auto getSquad()
+    {
+        for (unsigned int i = 0; i < squadName.size(); i++) {
+            std::cout << squadName[i]->getSpeed() << " ";
+            std::cout << squadName[i]->getAge() << " ";
+            std::cout << squadName[i]->getAttack() << " ";
+            std::cout << squadName[i]->getHealth() << " ";
+            std::cout << squadName[i]->getArmor() << std::endl;
+        }
+        std::cout << "\n";
     }
 
-    void getSquad() {
-        for(int i = 0; i < Mysquad.size(); i++) {
-            Mysquad[i]->getArmor();
-            Mysquad[i]->getAttack();
-            Mysquad[i]->getSpeed();
-            Mysquad[i]->getAge();
-            Mysquad[i]->GetAll();
+    auto setSquad()
+    {
+        for (unsigned int i = 0; i < squadName.size(); i++) {
+            squadName[i]->getSpeed();
+            squadName[i]->getAge();
+            squadName[i]->getAttack();
+            squadName[i]->getHealth();
+            squadName[i]->getArmor();
+        }
+        return squadName;
+    }
+
+    void getUnit(int i)
+    {
+        std::cout << squadName[i]->getSpeed() << " ";
+        std::cout << squadName[i]->getAge() << " ";
+        std::cout << squadName[i]->getAttack() << " ";
+        std::cout << squadName[i]->getHealth() << " ";
+        std::cout << squadName[i]->getArmor() << "\n\n";
+    }
+
+    void addUnit(auto *unit)
+    {
+        squadName.push_back(unit);
+    }
+
+    void deleteUnit(int pos)
+    {
+        squadName.erase(squadName.begin()+pos);
+    }
+
+    void getSize()
+    {
+        std::cout << squadName.size() << "\n";
+    }
+
+};
+
+class VectorOfSquads {
+private:
+    std::vector<Squad *> N;
+    int m_amount = 0;
+public:
+    void setSquad()
+    {
+        N.push_back(new Squad());
+    }
+
+    void getSquads(int Amount)
+    {
+        int size =  N.size();
+        int number = 0;
+        for (auto Archers : N) {
+            if(number == size - 1) {
+                for (int i = 0; i < Amount; i++) {
+                    Archers->addUnit(new Archer(rand() % 50, rand() % 50, rand() % 50, 1, 100));
+                }
+                Archers->getSquad();
+                }
+                number++;
+        }
+        N[0]->getSquad();
+        number ++;
+    }
+    void checkSquad(int number)
+    {
+        N[number]->getSquad();
+    }
+
+    void checkAll()
+    {
+        for (auto Archers : N) {
+            Archers->getSquad();
         }
     }
 
-    void getUnit(int i) {
-        Mysquad[i]->getArmor();
-        Mysquad[i]->getAttack();
-        Mysquad[i]->getSpeed();
-        Mysquad[i]->getAge();
-        Mysquad[i]->GetAll();
+    void deleteSquad(int number)
+    {
+        N.erase(N.begin() + number);
     }
 };
-
-int main() {
+int main()
+{
+    int number = 0;
     int amount = 0;
+    srand(time(0));
+    int command = 1;
+    VectorOfSquads Army;
+    for(;;) {
+        std::cout << "Выберите команду:\n 1.Создать отряд\n 2.Посмотреть отряд\n 3.Посмотреть все отряды.\n 4.Удалить отряд\n";
+        std::cin >> command;
+        switch(command) {
+            case 1: {
+                std::cin >> amount;
+                Army.setSquad();
+                Army.getSquads(amount);
+                break;
+            }
+            case 2: {
+                std::cin >> number;
+                Army.checkSquad(number);
+                break;
+            }
+            case 3: {
+                Army.checkAll();
+                break;
+            }
+            case 4: {
+                std::cin >> number;
+                Army.deleteSquad(number);
+                break;
+            }
+            case 5: {
+                break;
+            }
 
-
-    std::vector <Human *> Warriorvector;
-    std::vector <Human *> Peasantvector;
-    std::vector <Human *> Archervector;
-
-    std::cout << "Enter amount of Archers: ";
-    std::cin >> amount;
-    for(int i = 0; i < amount; i++) {
-        Archervector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30));
+        }
     }
-
-    Squad Archers;
-    Archers.setSquad( &Archervector);
-    Archers.getSquad();
-    Archers.getUnit(2);
-
-    std::cout << "Enter amount of warriors: ";
-    std::cin >> amount;
-    for(int i = 0; i < amount; i++) {
-        Warriorvector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30));
-    }
-    for (auto warrior : Warriorvector) {
-        warrior->getAge();
-        warrior->getSpeed();
-        warrior->getAttack();
-        warrior->GetAll();
-        int Amount = 0; Amount ++;
-    }
-    std::cout << "Enter amount of peasants: ";
-    std::cin >> amount;
-    for(int i = 0; i < amount; i++) {
-        Peasantvector.push_back(new Archer(1 + rand() % 50, 1 + rand() % 100, 1 + rand() % 10, 1 + rand() % 30 ));
-    }
-    for (auto peasant : Peasantvector) {
-        peasant->getAge();
-        peasant->getSpeed();
-        peasant->getAttack();
-        peasant->GetAll();
-        int Amount = 0; Amount ++;
-    }
-    return 0;
+return 0;
 }
+
